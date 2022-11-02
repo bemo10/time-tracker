@@ -1,0 +1,154 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
+public class Project extends Container {
+  ArrayList<Container> children = new ArrayList<>();
+
+  Project()
+  {
+
+  }
+
+  Project(String name)
+  {
+    super(name);
+  }
+
+  Project(int id, String name, Duration totalTime, LocalDateTime initialDate, LocalDateTime finalDate)
+  {
+    super(id, name, totalTime, initialDate, finalDate);
+  }
+
+  public void addChild(Container child)
+  {
+    children.add(child);
+    child.setParent(this);
+  }
+
+  public Duration getTotalTime()
+  {
+    updateTimeData();
+    return totalTime;
+  }
+
+  public LocalDateTime getInitialDate()
+  {
+    updateTimeData();
+    if (initialDate != null)
+    {
+      initialDate = initialDate.truncatedTo(ChronoUnit.SECONDS);
+    }
+    return initialDate;
+  }
+
+  public LocalDateTime getFinalDate()
+  {
+    updateTimeData();
+    if (finalDate != null)
+    {
+      finalDate = finalDate.truncatedTo(ChronoUnit.SECONDS);
+    }
+    return finalDate;
+  }
+
+  // Calcular fecha inicial, fecha final y tiempo total a partir de hijos
+  private void updateTimeData()
+  {
+    this.totalTime = Duration.ofSeconds(0);
+
+    this.children.forEach(container -> {
+      // Comprobar y asignar fecha inicial
+      if (container.getInitialDate() != null)
+      {
+        if ( (this.initialDate == null) || (container.getInitialDate().isBefore(this.initialDate)) )
+        {
+          this.initialDate = container.getInitialDate();
+        }
+      }
+
+      // Comprobar y asignar fecha final
+      if (container.getFinalDate() != null)
+      {
+        if ( (this.finalDate == null) || (container.getFinalDate().isAfter(this.finalDate)) )
+        {
+          this.finalDate = container.getFinalDate();
+        }
+      }
+
+      // Asignar tiempo total
+      this.totalTime = this.totalTime.plus(container.getTotalTime());
+    });
+  }
+
+  private ArrayList<Task> getTaskChildren()
+  {
+    ArrayList<Task> taskChildren = new ArrayList<>();
+    this.children.forEach(container -> {
+      if (container instanceof Task)
+      {
+        taskChildren.add((Task)container);
+      }
+    });
+    return taskChildren;
+  }
+
+  public ArrayList<Container> getChildren()
+  {
+    return children;
+  }
+
+  public void printSubTree()
+  {
+    System.out.println("Root " + this.toString() + " --->");
+
+
+    for(TreeIterator it = this.createIterator().first(); it != null; it = it.next())
+    {
+      // Calculate indentation
+      String indentation = "";
+      Project parent = (Project)it.getElement().getParent();
+      while(parent != null)
+      {
+        indentation += "    ";
+        parent = (Project)parent.getParent();
+      }
+      indentation += "|---";
+
+      // Print projects and Tasks
+      System.out.println(indentation + " " + it.getElement().toString());
+
+      // Print Task intervals
+      if (it.getElement() instanceof Task)
+      {
+        String finalIndentation = indentation;
+        ((Task) it.getElement()).getIntervals().forEach(interval -> {
+          System.out.println("    " + finalIndentation + " " + interval.toString());
+        });
+      }
+    }
+  }
+
+  public TreeIterator createIterator()
+  {
+    return new TreeIterator(this);
+  }
+
+  public String toString()
+  {
+
+    String me = "Project ";
+    if (this.getName() != "")
+    {
+      me += '"' + this.getName() + '"' + " ";
+    }
+    me += "with id " + this.getId() +
+        "  ->  START: " + this.getInitialDate()  +
+        "  -  END: " + this.getFinalDate() +
+        "  -  DURATION: " + this.getTotalTime();
+
+    return me;
+  }
+
+}

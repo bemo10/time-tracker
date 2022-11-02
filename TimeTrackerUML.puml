@@ -1,0 +1,224 @@
+@startuml
+
+abstract class Observable {
+    -bool isChanged
+    +void addObserver()
+    +void removeObserver()
+    +void setChanged()
+    +void notifyObservers()
+}
+
+class TimeManager {
+    -int timeToUpdate
+    +void tick()
+}
+
+interface Observer {
+    +update(arg0: timePassed)
+}
+
+abstract class Container {
+    #int id
+    #String name
+    #Container parent
+    #Date initialDate
+    #Date finalDate
+    #int totalTime
+
+    +int getId()
+    +String getName()
+    +Container getParent()
+    +abstract int getTotalTime()
+    +abstract Date getInitialDate()
+    +abstract Date getFinalDate()
+    +abstract void setTotalTime()
+    +abstract void setInitialDate()
+    +abstract void setFinalDate()
+}
+
+class Project {
+    +void addChild()
+    +int getTotalTime()
+    +Date getInitialDate()
+    +Date getFinalDate()
+    +void printSubTree()
+    +void setTotalTime()
+    +void setInitialDate()
+    +void setFinalDate()
+    +TreeIterator createIterator()
+}
+
+class Task {
+    +void update()
+    +void start()
+    +void stop()
+    +List<Interval> getIntervals()
+    +void addInterval()
+    +int getTotalTime()
+    +Date getInitialDate()
+    +Date getFinalDate()
+    +void setTotalTime()
+    +void setInitialDate()
+    +void setFinalDate()
+}
+
+class Interval {
+    -int id
+    -Task parent
+    -int totalTime
+    -Date initialDate
+    -Date finalDate
+
+    +int getTotalTime()
+    +Date getInitialDate()
+    +Date getFinalDate()
+    +void setTotalTime()
+    +void setInitialDate()
+    +void setFinalDate()
+}
+
+class PersistenceManager {
+    -Project root
+
+    +Project getRoot()
+    +void setRoot()
+    +void TreeToJson()
+    +void JsonToTree()
+}
+
+interface Iterator {
+    +first()
+    +next()
+    +hasNext()
+    +getElement()
+}
+
+class TreeIterator {
+    -Project root
+    -Project currentElement
+
+    +first()
+    +next()
+    +hasNext()
+    +getElement()
+}
+
+
+/'
+class ContainerTree {
+    -int id
+    -Project root
+
+    +int getId()
+    +Project getRoot()
+    +void addContainer(arg0: newContainer, arg1: parent)
+    +Container findContainerById()
+    +void TreeToJson()
+    +void JsonToTree()
+}
+
+class Invoker {
+    +void addCommand()
+    +void executeCommand()
+    +void tick()
+}
+
+interface Command {
+    +void execute()
+}
+
+object FlutterClient {
+    ...
+}
+
+object WebServer {
+    ...
+}
+
+class AddContainerCommand {
+    -ContainerTree tree
+    -Project parent
+    -Container newContainer
+
+    +void execute()
+}
+
+class StartTaskCommand {
+    -Observable timeManager
+    -Task task
+
+    +void execute()
+}
+
+class EndTaskCommand {
+    -Observable timeManager
+    -Task task
+
+    +void execute()
+}
+
+class GetTreeCommand {
+    -ContainerTree tree
+    -WebServer response
+
+    +void execute()
+}
+
+class OtherCommands {
+    ...
+
+    +void execute()
+}
+'/
+
+
+
+Container "1" --> "     1" Container
+Container <|-- Task
+Container <|-- Project
+Task *-- "0..* " Interval
+Project "0..*" *--  Container
+Observable <|-- TimeManager
+Observer <|.. Task
+Observable *-- "0..*  " Observer
+Project "1 " <-- "1" PersistenceManager
+Iterator <|.. TreeIterator
+TreeIterator "1  " --> "1 " Project
+TreeIterator "1 " --> "0..1  " Container
+Project ..> TreeIterator
+
+/'
+Invoker o-- Command
+FlutterClient ..> WebServer
+WebServer ..> Invoker
+Command <|.. AddContainerCommand
+Command <|.. StartTaskCommand
+Command <|.. EndTaskCommand
+Command <|.. GetTreeCommand
+Command <|.. OtherCommands
+AddContainerCommand --> ContainerTree
+GetTreeCommand --> ContainerTree
+'/
+'GetTreeCommand --> WebServer
+'StartTaskCommand --> Observable
+'EndTaskCommand --> Observable
+
+/'
+note left of TimeManager::tick
+  Ejecuta en un segundo Thread.
+
+  - Comprueba si el tiempo que ha pasado
+  es mayor o igual que "timeToUpdate".
+  - Ejecuta "setChanged()" en caso que si.
+  - Ejecuta "notifyObservers()"
+end note
+'/
+/'
+note left of Invoker::tick
+  Ejecuta en el Thread principal.
+
+  - Ejecuta todos los comandos que han llegado del WebServer
+end note
+'/
+
+@enduml
