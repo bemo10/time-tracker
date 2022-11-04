@@ -136,7 +136,7 @@ public class Project extends Container {
     me += "with id " + this.getId() +
         "  ->  START: " + this.getInitialDate()  +
         "  -  END: " + this.getFinalDate() +
-        "  -  DURATION: " + this.getTotalTime();
+        "  -  DURATION: " + this.getTotalTime().getSeconds() + "s";
 
     return me;
   }

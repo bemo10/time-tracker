@@ -100,6 +100,6 @@ public class Interval {
     return "Interval with id " + this.getId() +
         "  ->  START: " + this.getInitialDate()  +
         "  -  END: " + this.getFinalDate() +
-        "  -  DURATION: " + this.getTotalTime();
+        "  -  DURATION: " + this.getTotalTime().getSeconds() + "s";
   }
 }
