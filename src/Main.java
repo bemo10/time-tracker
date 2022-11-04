@@ -9,25 +9,28 @@ public class Main
   public static void main(String[] args) {
     Project root = null;
 
-    // Sample tree Test
+    // Test 1: Sample tree
     //root = testA();
 
-    // Counting time Test
-    /*try {
+
+    // Test 2: Counting time
+    try {
       root = testB();
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
-    }*/
+    }
 
-    // Escibir Json test
+
+    // Test 3: Escibir JSON (Ejecutar con el Test 1 o 2 para escribir el arbol que resulta de esos tests)
     //testJsonWrite(root);
 
-    // Leer Json test
-    try {
+
+    // Test 4: Leer JSON
+    /*try {
       testJsonRead();
     } catch (IOException e) {
       throw new RuntimeException(e);
-    }
+    }*/
 
 
 
@@ -125,6 +128,7 @@ public class Main
       @Override
       public void run() {
         root.printSubTree();
+        System.out.println("----------------------------------------------------------------------------------------------------------");
       }
     };
     printTimer.scheduleAtFixedRate(printTask, 100, tickDelay);

@@ -3,13 +3,12 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+
+// Un Project es uno de los contenedores que un usuario puede crear dentro del arbol de contenedores. Los proyectos pueden contener hijos que pueden ser proyectos y/o tareas.
 public class Project extends Container {
   ArrayList<Container> children = new ArrayList<>();
 
-  Project()
-  {
-
-  }
+  Project() {}
 
   Project(String name)
   {
@@ -21,6 +20,7 @@ public class Project extends Container {
     super(id, name, totalTime, initialDate, finalDate);
   }
 
+  // Añadir un nuevo hijo
   public void addChild(Container child)
   {
     children.add(child);
@@ -82,23 +82,12 @@ public class Project extends Container {
     });
   }
 
-  private ArrayList<Task> getTaskChildren()
-  {
-    ArrayList<Task> taskChildren = new ArrayList<>();
-    this.children.forEach(container -> {
-      if (container instanceof Task)
-      {
-        taskChildren.add((Task)container);
-      }
-    });
-    return taskChildren;
-  }
-
   public ArrayList<Container> getChildren()
   {
     return children;
   }
 
+  // Hacer un print del sub-arbol que tiene este proyecto como raiz
   public void printSubTree()
   {
     System.out.println("Root " + this.toString() + " --->");
@@ -106,7 +95,7 @@ public class Project extends Container {
 
     for(TreeIterator it = this.createIterator().first(); it != null; it = it.next())
     {
-      // Calculate indentation
+      // Decoracion de texto
       String indentation = "";
       Project parent = (Project)it.getElement().getParent();
       while(parent != null)
@@ -116,10 +105,10 @@ public class Project extends Container {
       }
       indentation += "|---";
 
-      // Print projects and Tasks
+      // Print de proyectos y tareas
       System.out.println(indentation + " " + it.getElement().toString());
 
-      // Print Task intervals
+      // Print de intervalos
       if (it.getElement() instanceof Task)
       {
         String finalIndentation = indentation;
@@ -130,6 +119,7 @@ public class Project extends Container {
     }
   }
 
+  // Crear y devolver un iterador que tiene como raiz este proyecto
   public TreeIterator createIterator()
   {
     return new TreeIterator(this);

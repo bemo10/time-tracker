@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.Duration;
 
+// Un Task es uno de los contenedores que un usuario puede crear dentro del arbol de contenedores.
+// Las tareas tambien son parte del patron de Observer. Dentro del patron las tareas son Observers mientras que la clase TimeManager es el Observable
+// Las tareas pueden contener intervalos. Cada vez que una tarea se añade a TimeManager como Observer, esta crea un nuevo intervalo
 public class Task extends Container implements Observer {
-  private ArrayList<Interval> intervals = new ArrayList<Interval>();
+  private ArrayList<Interval> intervals = new ArrayList<>();
   private boolean isRunning = false;
 
-
-  Task()
-  {
-
-  }
+  Task() {}
 
   Task(String name)
   {
@@ -23,7 +22,6 @@ public class Task extends Container implements Observer {
   {
     super(id, name, totalTime, initialDate, finalDate);
   }
-
 
   public Duration getTotalTime()
   {
@@ -51,10 +49,12 @@ public class Task extends Container implements Observer {
     return finalDate;
   }
 
+  // Calcular fecha inicial, fecha final y tiempo total a partir de los intervalos
   private void updateTimeData()
   {
     if (!intervals.isEmpty())
     {
+      // La fecha inicial de esta tarea es la fecha inicial del primer intervalo mientras que la fecha final es la fecha final del ultimo intervalo
       this.initialDate = intervals.get(0).getInitialDate();
       this.finalDate = intervals.get(intervals.size()-1).getFinalDate();
 
@@ -66,18 +66,21 @@ public class Task extends Container implements Observer {
     }
   }
 
+  // Esta funcion es una implementacion de la funcion update() del interfaz Observer. Sive para actualizar la fecha inicial y final y el tiempo total del ultimo intervalo
   public void update(Object arg)
   {
+    // El argumento que recibimos del Observable es el tiempo que a parasado desde el ultimo tick
     int timePassed = (int)arg;
 
     // Actualizar el ultimo intervalo
     Interval lastInterval = this.intervals.get(intervals.size()-1);
-    //this.updateInterval(lastInterval);
     lastInterval.setFinalDate(LocalDateTime.now());
     lastInterval.setTotalTime(lastInterval.getTotalTime().plusMillis(timePassed));
     lastInterval.setInitialDate(lastInterval.getFinalDate().minus(lastInterval.getTotalTime()));
   }
 
+  // Implementacion de la funcion start() del interfaz Observer. El Observable llama a esta funcion cuando esta tarea es añadida a la lista de Observers.
+  // Sirve para crear un nuevo intervalo y actualizar la variable "isRunning"
   public void start()
   {
     isRunning = true;
@@ -85,14 +88,14 @@ public class Task extends Container implements Observer {
     this.addInterval(new Interval());
   }
 
+  // implementacion de la funcion stop() del interfaz Observer. El Observable llama a esta funcion cuando esta tarea es eliminada de la lista de Observers.
+  // Sirve para actualizar la variable "isRunning"
   public void stop()
   {
     isRunning = false;
-    // Update last interval
-    Interval lastInterval = this.intervals.get(intervals.size()-1);
-    //this.updateInterval(lastInterval);
   }
 
+  // Añadir un nuevo intervalo
   public void addInterval(Interval interval)
   {
     this.intervals.add(interval);
@@ -103,12 +106,6 @@ public class Task extends Container implements Observer {
   {
     return intervals;
   }
-
-  /*public void updateInterval(Interval interval)
-  {
-    interval.setFinalDate(LocalDateTime.now());
-    interval.calculateTotalTime();
-  }*/
 
   public String toString()
   {

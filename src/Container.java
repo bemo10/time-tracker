@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.Duration;
 
 
+// De esta clase heredan las clases de tareas y proyectos.
 abstract public class Container {
   private static int idGenerator = 0;
   protected int id;
@@ -46,6 +47,7 @@ abstract public class Container {
     this.finalDate = finalDate;
   }
 
+  // Esta funcion sirve para generar un id unico por cada contenedor (tarea / proyecto)
   private void generateNewId()
   {
     this.id = this.idGenerator++;

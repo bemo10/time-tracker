@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+
+// Iterador que sirve para iterar sobre un arbol de contenedores (proyectos y tareas). Parte del patron Iterator e implementa el interfaz Iterator
 public class TreeIterator implements Iterator {
   private Project root;
   private Container currentElement;
@@ -16,6 +18,7 @@ public class TreeIterator implements Iterator {
     this.currentElement = current;
   }
 
+  // Devuelve el iterador que correspode al primer elemento del arbol. El primer elemento es el primer hijo de la raiz (primero desde la izquierda)
   public TreeIterator first()
   {
     ArrayList<Container> children = root.getChildren();
@@ -29,6 +32,7 @@ public class TreeIterator implements Iterator {
     return new TreeIterator(this.root, firstChild);
   }
 
+  // Devuelve el iterador que correspode al siguiente elemento del arbol
   public TreeIterator next()
   {
     Container nextContainer = getNextContainer();
@@ -37,11 +41,14 @@ public class TreeIterator implements Iterator {
     {
       return new TreeIterator(this.root, nextContainer);
     }
+    // Devolvemos null si el elemento actual es el ultimo
     return null;
   }
 
+  // Devuelve el siguiente Container apartir el container actual de este iterador
   private Container getNextContainer()
   {
+    // Si el contenedor actual es un proyecto y este proyecto tiene hijos entonces obtenemos el siguiente elemento con la funcion first()
     if (this.getElement() instanceof Project)
     {
       if (((Project)this.getElement()).createIterator().first().getElement() != this.getElement())
@@ -50,6 +57,8 @@ public class TreeIterator implements Iterator {
       }
     }
 
+    // Si el contenedor actual no tiene hijos, entonces comprobamos si su padre tiene mas hijos y devolvemos el siguiente hijo.
+    // Si su padre no tiene mas hijos entonces subimos un nivel en el arbol de contenedores y buscamos si hay mas hijos hasta llegar el siguiente elemento
     Container child = this.getElement();
     while(true)
     {
@@ -67,83 +76,11 @@ public class TreeIterator implements Iterator {
       child = parent;
     }
 
-
+    // En caso de que sea el ultimo elemento devolvemos null
     return null;
   }
 
-  /*
-  public TreeIterator first()
-  {
-    ArrayList<Container> children = root.getChildren();
-    Project firstChild = root;
-
-    boolean foundFirstElement = false;
-    while(!foundFirstElement)
-    {
-      // Find a child project in children list
-      boolean foundChildProject = false;
-
-      for (int i = 0; i < children.size(); i++)
-      {
-        if (children.get(i) instanceof Project)
-        {
-          firstChild = (Project)children.get(i);
-          children = firstChild.getChildren();
-          foundChildProject = true;
-          break;
-        }
-      }
-
-      // If no child project is found take current child as first element
-      if (!foundChildProject)
-      {
-        foundFirstElement = true;
-      }
-    }
-
-    return new TreeIterator(this.root, firstChild);
-  }
-
-  public TreeIterator next()
-  {
-    Project nextProject = getNextProject(this.currentElement);
-
-    if (nextProject != null)
-    {
-      return new TreeIterator(this.root, nextProject);
-    }
-    return null;
-  }
-
-  private Project getNextProject(Project project)
-  {
-    Project projectParent = (Project) project.getParent();
-    if (projectParent == null)
-    {
-      return null;
-    }
-    int projectIndex = projectParent.getChildren().indexOf(project);
-
-    if (projectIndex < projectParent.getChildren().size()-1)
-    {
-      for (int i = projectIndex+1; i < projectParent.getChildren().size(); i++)
-      {
-        if (projectParent.getChildren().get(i) instanceof Project)
-        {
-          return (Project)((Project) projectParent.getChildren().get(i)).createIterator().first().getElement();
-        }
-      }
-    }
-
-    if (projectParent != this.root)
-    {
-      return projectParent;
-    }
-
-    return null;
-  }
-   */
-
+  // Comprobamos si existe el siguiente elemento
   public boolean hasNext()
   {
     if (this.next() != null)
@@ -152,6 +89,8 @@ public class TreeIterator implements Iterator {
     }
     return false;
   }
+
+  // Devolvemos el Contenedor actual de este iterador
   public Container getElement()
   {
     return currentElement;

@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
-
+// Un intervalo representa un perio de tiempo en el que una tarea ha estado ejecutando
 public class Interval {
   private static int idGenerator = 0;
   private int id;
@@ -36,6 +36,7 @@ public class Interval {
     this.finalDate = finalDate;
   }
 
+  // Generar un Id unico para cada intervalo
   private int generateNewId()
   {
     return idGenerator++;
@@ -92,11 +93,6 @@ public class Interval {
   public void setFinalDate(LocalDateTime date)
   {
     this.finalDate = date;
-  }
-
-  public void calculateTotalTime()
-  {
-    this.totalTime = Duration.between(this.getInitialDate(), this.getFinalDate());
   }
 
   public String toString()
