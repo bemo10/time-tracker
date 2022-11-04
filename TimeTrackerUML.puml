@@ -1,23 +1,33 @@
 @startuml
 
 abstract class Observable {
-    -bool isChanged
+    #bool isChanged
+
     +void addObserver()
     +void removeObserver()
+    +void removeAllObservers()
     +void setChanged()
+    +void clearChanged()
     +void notifyObservers()
 }
 
 class TimeManager {
-    -int timeToUpdate
+    -int tickDelay
+    -Timer timer
+
     +void tick()
+    +setTickDelay()
+    +stopTick()
 }
 
 interface Observer {
     +update(arg0: timePassed)
+    +start()
+    +stop()
 }
 
 abstract class Container {
+    -int idGenerator
     #int id
     #String name
     #Container parent
@@ -25,15 +35,18 @@ abstract class Container {
     #Date finalDate
     #int totalTime
 
+    -void generateNewId()
     +int getId()
     +String getName()
     +Container getParent()
     +abstract int getTotalTime()
     +abstract Date getInitialDate()
     +abstract Date getFinalDate()
-    +abstract void setTotalTime()
-    +abstract void setInitialDate()
-    +abstract void setFinalDate()
+    +void setTotalTime()
+    +void setInitialDate()
+    +void setFinalDate()
+    +setParent()
+    +abstract String toString()
 }
 
 class Project {
@@ -41,40 +54,49 @@ class Project {
     +int getTotalTime()
     +Date getInitialDate()
     +Date getFinalDate()
+    +ArrayList<Container> getChildren()
+    -void updateTimeData()
     +void printSubTree()
-    +void setTotalTime()
-    +void setInitialDate()
-    +void setFinalDate()
     +TreeIterator createIterator()
+    +toString()
 }
 
 class Task {
-    +void update()
-    +void start()
-    +void stop()
-    +List<Interval> getIntervals()
-    +void addInterval()
+    -boolean isRunning
+
     +int getTotalTime()
     +Date getInitialDate()
     +Date getFinalDate()
+    -void updateTimeData()
     +void setTotalTime()
     +void setInitialDate()
     +void setFinalDate()
+    +void update()
+    +void start()
+    +void stop()
+    +ArrayList<Interval> getIntervals()
+    +void addInterval()
+    +toString()
 }
 
 class Interval {
+    -int idGenerator
     -int id
     -Task parent
     -int totalTime
     -Date initialDate
     -Date finalDate
 
+    -void generateNewId()
+    +Task getParent()
+    +void setParent()
     +int getTotalTime()
     +Date getInitialDate()
     +Date getFinalDate()
     +void setTotalTime()
     +void setInitialDate()
     +void setFinalDate()
+    +String toString()
 }
 
 class PersistenceManager {
@@ -84,6 +106,7 @@ class PersistenceManager {
     +void setRoot()
     +void TreeToJson()
     +void JsonToTree()
+    -JSONObject jsonObjFromData()
 }
 
 interface Iterator {
@@ -95,10 +118,11 @@ interface Iterator {
 
 class TreeIterator {
     -Project root
-    -Project currentElement
+    -Container currentElement
 
     +first()
     +next()
+    -Container getNextContainer()
     +hasNext()
     +getElement()
 }
@@ -183,9 +207,10 @@ Observer <|.. Task
 Observable *-- "0..*  " Observer
 Project "1 " <-- "1" PersistenceManager
 Iterator <|.. TreeIterator
-TreeIterator "1  " --> "1 " Project
-TreeIterator "1 " --> "0..1  " Container
+TreeIterator "1 " --> "1 " Project
+TreeIterator "1" --> "0..1  " Container
 Project ..> TreeIterator
+PersistenceManager ..> TreeIterator
 
 /'
 Invoker o-- Command

@@ -91,4 +91,6 @@ abstract public class Container {
   {
     this.parent = parent;
   }
+
+  abstract public String toString();
 }

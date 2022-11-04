@@ -13,7 +13,7 @@ public class Interval {
 
   Interval()
   {
-    this.id = generateNewId();
+    generateNewId();
     this.totalTime = Duration.ofSeconds(0);
     this.initialDate = LocalDateTime.now();
     this.finalDate = LocalDateTime.now();
@@ -21,7 +21,7 @@ public class Interval {
 
   Interval(Task parent)
   {
-    this.id = generateNewId();
+    generateNewId();
     this.parent = parent;
     this.totalTime = Duration.ofSeconds(0);
     this.initialDate = LocalDateTime.now();
@@ -37,9 +37,9 @@ public class Interval {
   }
 
   // Generar un Id unico para cada intervalo
-  private int generateNewId()
+  private void generateNewId()
   {
-    return idGenerator++;
+    this.id = this.idGenerator++;
   }
 
   public int getId()
