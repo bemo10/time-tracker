@@ -14,11 +14,11 @@ public class Main
 
 
     // Test 2: Counting time
-    /*try {
+    try {
       root = testB();
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
-    }*/
+    }
 
 
     // Test 3: Escibir JSON (Ejecutar con el Test 1 o 2 para escribir el arbol que resulta de esos tests)
@@ -26,11 +26,11 @@ public class Main
 
 
     // Test 4: Leer JSON
-    try {
+    /*try {
       testJsonRead();
     } catch (IOException e) {
       throw new RuntimeException(e);
-    }
+    }*/
 
 
 

@@ -3,6 +3,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 
 // Un Task es uno de los contenedores que un usuario puede crear dentro del arbol de contenedores.
 // Las tareas tambien son parte del patron de Observer. Dentro del patron las tareas son Observers mientras que la clase TimeManager es el Observable
@@ -110,8 +111,8 @@ public class Task extends Container implements Observer {
   public String toString()
   {
      String text = "Task " + '"' + this.getName() + '"' + " with id " + this.getId() +
-        "  ->  START: " + this.getInitialDate()  +
-        "  -  END: " + this.getFinalDate() +
+        "  ->  START: " + ( this.getFinalDate() != null? this.getInitialDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null )  +
+        "  -  END: " + ( this.getFinalDate() != null? this.getFinalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null ) +
         "  -  DURATION: " + this.getTotalTime().getSeconds() + "s";
      if (isRunning)
      {

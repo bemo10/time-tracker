@@ -1,5 +1,6 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -134,8 +135,8 @@ public class Project extends Container {
       me += '"' + this.getName() + '"' + " ";
     }
     me += "with id " + this.getId() +
-        "  ->  START: " + this.getInitialDate()  +
-        "  -  END: " + this.getFinalDate() +
+        "  ->  START: " + ( this.getFinalDate() != null? this.getInitialDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null )  +
+        "  -  END: " + ( this.getFinalDate() != null? this.getFinalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null ) +
         "  -  DURATION: " + this.getTotalTime().getSeconds() + "s";
 
     return me;

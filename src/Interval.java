@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 // Un intervalo representa un perio de tiempo en el que una tarea ha estado ejecutando
@@ -98,8 +99,8 @@ public class Interval {
   public String toString()
   {
     return "Interval with id " + this.getId() +
-        "  ->  START: " + this.getInitialDate()  +
-        "  -  END: " + this.getFinalDate() +
+        "  ->  START: " + ( this.getFinalDate() != null? this.getInitialDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null ) +
+        "  -  END: " + ( this.getFinalDate() != null? this.getFinalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null ) +
         "  -  DURATION: " + this.getTotalTime().getSeconds() + "s";
   }
 }
