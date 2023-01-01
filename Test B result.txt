@@ -1,0 +1,89 @@
+----- tools.Test: start the clock and wait 1.5 seconds
+ ### Time Manager: Tick executed! ###
+
+----- tools.Test: start task transportation, wait 6 seconds and then stop it
+ ### Time Manager: Tick executed! ###
+core.Interval with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:55  -  DURATION: 2s
+core.Task "transportation" with id 6  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:55  -  DURATION: 2s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:55  -  DURATION: 2s
+ ### Time Manager: Tick executed! ###
+core.Interval with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:57  -  DURATION: 4s
+core.Task "transportation" with id 6  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:57  -  DURATION: 4s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:57  -  DURATION: 4s
+ ### Time Manager: Tick executed! ###
+core.Interval with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:59  -  DURATION: 6s
+core.Task "transportation" with id 6  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:59  -  DURATION: 6s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:20:59  -  DURATION: 6s
+
+----- tools.Test: wait 2 seconds
+ ### Time Manager: Tick executed! ###
+
+----- tools.Test: start task first list, wait 6 seconds
+ ### Time Manager: Tick executed! ###
+core.Interval with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:03  -  DURATION: 2s
+core.Task "first list" with id 7  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:03  -  DURATION: 2s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:03  -  DURATION: 2s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:03  -  DURATION: 2s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:03  -  DURATION: 8s
+ ### Time Manager: Tick executed! ###
+core.Interval with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:05  -  DURATION: 4s
+core.Task "first list" with id 7  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:05  -  DURATION: 4s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:05  -  DURATION: 4s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:05  -  DURATION: 4s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:05  -  DURATION: 10s
+ ### Time Manager: Tick executed! ###
+core.Interval with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:07  -  DURATION: 6s
+core.Task "first list" with id 7  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:07  -  DURATION: 6s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:07  -  DURATION: 6s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:07  -  DURATION: 6s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:07  -  DURATION: 12s
+
+----- tools.Test:  start task second list and wait 4 seconds
+ ### Time Manager: Tick executed! ###
+core.Interval with id 2  ->  START: 2022-11-06 21:21:07  -  END: 2022-11-06 21:21:09  -  DURATION: 2s
+core.Task "second list" with id 8  ->  START: 2022-11-06 21:21:07  -  END: 2022-11-06 21:21:09  -  DURATION: 2s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:09  -  DURATION: 8s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:09  -  DURATION: 8s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:09  -  DURATION: 14s
+core.Interval with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:09  -  DURATION: 8s
+core.Task "first list" with id 7  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:09  -  DURATION: 8s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:09  -  DURATION: 10s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:09  -  DURATION: 10s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:09  -  DURATION: 16s
+ ### Time Manager: Tick executed! ###
+core.Interval with id 2  ->  START: 2022-11-06 21:21:07  -  END: 2022-11-06 21:21:11  -  DURATION: 4s
+core.Task "second list" with id 8  ->  START: 2022-11-06 21:21:07  -  END: 2022-11-06 21:21:11  -  DURATION: 4s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:11  -  DURATION: 12s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:11  -  DURATION: 12s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:11  -  DURATION: 18s
+core.Interval with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:11  -  DURATION: 10s
+core.Task "first list" with id 7  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:11  -  DURATION: 10s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:11  -  DURATION: 14s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:11  -  DURATION: 14s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:11  -  DURATION: 20s
+
+----- tools.Test: stop first list
+
+----- tools.Test: wait 2 seconds and then stop second list
+ ### Time Manager: Tick executed! ###
+core.Interval with id 2  ->  START: 2022-11-06 21:21:07  -  END: 2022-11-06 21:21:13  -  DURATION: 6s
+core.Task "second list" with id 8  ->  START: 2022-11-06 21:21:07  -  END: 2022-11-06 21:21:13  -  DURATION: 6s
+core.Project "problems" with id 4  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:13  -  DURATION: 16s
+core.Project "software design" with id 1  ->  START: 2022-11-06 21:21:01  -  END: 2022-11-06 21:21:13  -  DURATION: 16s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:13  -  DURATION: 22s
+
+----- tools.Test: wait 2 seconds
+ ### Time Manager: Tick executed! ###
+
+----- tools.Test: start transportation, wait 4 seconds and then stop it
+ ### Time Manager: Tick executed! ###
+core.Interval with id 3  ->  START: 2022-11-06 21:21:15  -  END: 2022-11-06 21:21:17  -  DURATION: 2s
+core.Task "transportation" with id 6  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:17  -  DURATION: 8s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:17  -  DURATION: 24s
+ ### Time Manager: Tick executed! ###
+core.Interval with id 3  ->  START: 2022-11-06 21:21:15  -  END: 2022-11-06 21:21:19  -  DURATION: 4s
+core.Task "transportation" with id 6  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:19  -  DURATION: 10s
+core.Project "root" with id 0  ->  START: 2022-11-06 21:20:53  -  END: 2022-11-06 21:21:19  -  DURATION: 26s
+ ### Time Manager: Tick executed! ###
+
+Process finished with exit code 0

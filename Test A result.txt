@@ -1,0 +1,13 @@
+Root core.Project with id 0  ->  START: null  -  END: null  -  DURATION: 0s --->
+    |--- core.Project "software design" with id 1  ->  START: null  -  END: null  -  DURATION: 0s
+        |--- core.Project "problems" with id 4  ->  START: null  -  END: null  -  DURATION: 0s
+            |--- core.Task "first list" with id 7  ->  START: null  -  END: null  -  DURATION: 0s
+            |--- core.Task "second list" with id 8  ->  START: null  -  END: null  -  DURATION: 0s
+        |--- core.Project "time tracker" with id 5  ->  START: null  -  END: null  -  DURATION: 0s
+            |--- core.Task "read handout" with id 9  ->  START: null  -  END: null  -  DURATION: 0s
+            |--- core.Task "first milestone" with id 10  ->  START: null  -  END: null  -  DURATION: 0s
+    |--- core.Project "software testing" with id 2  ->  START: null  -  END: null  -  DURATION: 0s
+    |--- core.Project "databases" with id 3  ->  START: null  -  END: null  -  DURATION: 0s
+    |--- core.Task "transportation" with id 6  ->  START: null  -  END: null  -  DURATION: 0s
+
+Process finished with exit code 0

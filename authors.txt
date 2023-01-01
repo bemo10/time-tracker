@@ -1,0 +1,7 @@
+Mohammed, Bendahmane / NIU: 1534144
+- Design by contract
+- toold.SearchByTag
+
+ Mancero Alvarado, Erick Paul / NIU: 1496589
+- Style => CheckStyle
+- Logging out.production.Time Tracker.logback.xml and pom.xml
