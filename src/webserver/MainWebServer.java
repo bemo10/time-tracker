@@ -4,6 +4,7 @@ import core.Container;
 //import core.Clock;
 import core.Project;
 import core.Task;
+import core.TimeManager;
 
 public class MainWebServer {
   public static void main(String[] args) {
@@ -15,7 +16,11 @@ public class MainWebServer {
     // implement this method that returns the tree of
     // appendix A in the practicum handout
 
-    // start your clock
+    // Llamar a la funcion tick del TimeManager que se ejecuta
+    // en un nuevo thread cada N segundos (notifica a los Observers)
+    int tickDelay = 2000;
+    TimeManager.setTickDelay(tickDelay); // Notificar Observers cada segundo
+    TimeManager.startTick();
 
     new WebServer(root);
   }
