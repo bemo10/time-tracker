@@ -138,6 +138,24 @@ public class WebServer {
           body = "{}";
           break;
         }
+        case "create_project": {
+          int id = Integer.parseInt(tokens[1]);
+          core.Project parent = (core.Project)((core.Project)root).findContainerById(id);
+          if (parent != null) {
+            parent.addChild(new core.Project(tokens[2].replace("%20", " ")));
+          }
+          body = "{}";
+          break;
+        }
+        case "create_task": {
+          int id = Integer.parseInt(tokens[1]);
+          core.Project parent = (core.Project)((core.Project)root).findContainerById(id);
+          if (parent != null) {
+            parent.addChild(new core.Task(tokens[2].replace("%20", " ")));
+          }
+          body = "{}";
+          break;
+        }
         // TODO: add new task, project
         // TODO: edit task, project properties
         default:
